@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.19-2",
+    "lastTouchedAt": "2026-02-23T02:34:10.130Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-21T10:00:03.125Z",
+    "lastRunVersion": "2026.2.19-2",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "attachOnly": false,
+    "defaultProfile": "openclaw"
+  },
+  "auth": {
+    "profiles": {
+      "github-copilot:github": {
+        "provider": "github-copilot",
+        "mode": "token"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "github-copilot/claude-sonnet-4"
+      },
+      "models": {
+        "github-copilot/gpt-4o": {},
+        "github-copilot/claude-sonnet-4": {}
+      },
+      "workspace": "/Users/ganlan/.openclaw/workspace",
+      "contextPruning": {
+        "mode": "cache-ttl",
+        "ttl": "2h"
+      },
+      "thinkingDefault": "high",
+      "verboseDefault": "on",
+      "elevatedDefault": "on",
+      "heartbeat": {
+        "every": "30m",
+        "model": "github-copilot/claude-sonnet-4",
+        "suppressToolErrorWarnings": false
+      },
+      "sandbox": {
+        "mode": "off"
+      }
+    }
+  },
+  "tools": {
+    "elevated": {
+      "enabled": true,
+      "allowFrom": {
+        "telegram": [
+          "*"
+        ],
+        "webchat": [
+          "*"
+        ]
+      }
+    },
+    "exec": {
+      "security": "full",
+      "ask": "off",
+      "node": "YOUR_NODE_ID_HERE",
+      "backgroundMs": 5000,
+      "timeoutSec": 1800,
+      "notifyOnExit": true,
+      "applyPatch": {
+        "enabled": true,
+        "allowModels": [
+          "*"
+        ]
+      }
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "command-logger": {
+          "enabled": true
+        },
+        "session-memory": {
+          "enabled": true
+        },
+        "error-recovery": {
+          "enabled": true,
+          "script": "hooks/error-recovery.js"
+        }
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "capabilities": {
+        "inlineButtons": "allowlist"
+      },
+      "enabled": true,
+      "customCommands": [
+        {
+          "command": "status",
+          "description": "查看系统状态"
+        },
+        {
+          "command": "files",
+          "description": "列出工作区文件"
+        },
+        {
+          "command": "memory",
+          "description": "查看记忆"
+        },
+        {
+          "command": "help",
+          "description": "获取帮助"
+        }
+      ],
+      "dmPolicy": "pairing",
+      "botToken": "YOUR_TELEGRAM_BOT_TOKEN_HERE",
+      "groupPolicy": "allowlist",
+      "textChunkLimit": 4000,
+      "chunkMode": "length",
+      "draftChunk": {
+        "minChars": 150,
+        "maxChars": 600,
+        "breakPreference": "paragraph"
+      },
+      "streamMode": "partial",
+      "retry": {
+        "attempts": 5,
+        "minDelayMs": 1000,
+        "maxDelayMs": 60000,
+        "jitter": 0.2
+      },
+      "actions": {
+        "reactions": true,
+        "sendMessage": true
+      },
+      "reactionNotifications": "own",
+      "reactionLevel": "minimal",
+      "linkPreview": true,
+      "ackReaction": "👀"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "remote": {
+      "token": "YOUR_GATEWAY_TOKEN_HERE"
+    },
+    "nodes": {}
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      }
+    }
+  }
+}
